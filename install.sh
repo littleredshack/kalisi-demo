@@ -22,7 +22,12 @@ if ! command -v docker &> /dev/null; then
     fi
     
     echo "Would you like me to help install Docker? (y/n)"
-    read -p "Enter choice [y]: " install_docker
+    if [ -t 0 ]; then
+        read -p "Enter choice [y]: " install_docker
+    else
+        echo "Enter choice [y]: " >&2
+        read install_docker < /dev/tty
+    fi
     install_docker=${install_docker:-y}
     
     if [[ "$install_docker" == "y" ]] || [[ "$install_docker" == "Y" ]]; then
@@ -90,7 +95,14 @@ echo "Choose your installation mode:"
 echo "1) Simple mode (just the web UI)"
 echo "2) Developer mode (web UI + SSH access)"
 echo ""
-read -p "Enter choice [1]: " choice
+
+# Handle piped input by reading from tty if available
+if [ -t 0 ]; then
+    read -p "Enter choice [1]: " choice
+else
+    echo "Enter choice [1]: " >&2
+    read choice < /dev/tty
+fi
 
 # Set ports and environment based on choice
 if [ "$choice" = "2" ]; then
