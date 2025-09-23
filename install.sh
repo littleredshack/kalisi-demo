@@ -124,7 +124,7 @@ docker run -d \
     $ENV_VARS \
     -v kalisi-demo-data:/data \
     --restart unless-stopped \
-    ghcr.io/glensimister/kalisi-demo:latest
+    ghcr.io/littleredshack/kalisi-demo:latest
 
 # Wait for startup
 echo "⏳ Waiting for services to start..."
