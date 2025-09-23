@@ -110,7 +110,7 @@ fi
 # Pull the image
 echo ""
 echo "📥 Downloading Kalisi Demo..."
-docker pull ghcr.io/glensimister/kalisi-demo:latest
+docker pull ghcr.io/littleredshack/kalisi-demo:latest
 
 # Stop existing container if any
 docker stop kalisi-demo 2>/dev/null || true

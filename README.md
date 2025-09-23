@@ -39,13 +39,13 @@ sudo usermod -aG docker $USER
 
 ```bash
 # Pull the image from GitHub Container Registry
-docker pull ghcr.io/glensimister/kalisi-demo:latest
+docker pull ghcr.io/littleredshack/kalisi-demo:latest
 
 # Run in simple mode (web UI only)
 docker run -d --name kalisi-demo \
   -p 8443:8443 \
   -v kalisi-demo-data:/data \
-  ghcr.io/glensimister/kalisi-demo:latest
+  ghcr.io/littleredshack/kalisi-demo:latest
 
 # Access the web UI
 # Open https://localhost:8443 in your browser
@@ -60,7 +60,7 @@ docker run -d --name kalisi-demo \
   -p 2222:22 \
   -e ENABLE_SSH=true \
   -v kalisi-demo-data:/data \
-  ghcr.io/glensimister/kalisi-demo:latest
+  ghcr.io/littleredshack/kalisi-demo:latest
 
 # Access via web
 # https://localhost:8443
