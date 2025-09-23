@@ -122,7 +122,7 @@ fi
 # Pull the image
 echo ""
 echo "📥 Downloading Kalisi Demo..."
-docker pull ghcr.io/littleredshack/kalisi-demo:latest
+docker pull ghcr.io/littleredshack/kalisi-demo:v1.2-multiarch
 
 # Stop existing container if any
 docker stop kalisi-demo 2>/dev/null || true
@@ -136,7 +136,7 @@ docker run -d \
     $ENV_VARS \
     -v kalisi-demo-data:/data \
     --restart unless-stopped \
-    ghcr.io/littleredshack/kalisi-demo:latest
+    ghcr.io/littleredshack/kalisi-demo:v1.2-multiarch
 
 # Wait for startup
 echo "⏳ Waiting for services to start..."
