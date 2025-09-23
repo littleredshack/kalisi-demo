@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalisi Demo - It Works!</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .status { margin: 1rem 0; }
+        .status-item {
+            padding: 0.5rem 1rem;
+            margin: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: inline-block;
+        }
+        .success { background: rgba(72, 187, 120, 0.3); }
+        .mode { 
+            margin-top: 2rem; 
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        code {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Kalisi Demo</h1>
+        <h2>Installation Successful!</h2>
+        
+        <div class="status">
+            <div class="status-item success" id="redis-status">Redis: Checking...</div>
+            <div class="status-item success" id="neo4j-status">Neo4j: Checking...</div>
+            <div class="status-item success" id="api-status">API: Running</div>
+        </div>
+
+        <div class="mode">
+            <h3 id="mode-display">Loading...</h3>
+            <p id="ssh-info" style="display: none;">
+                SSH available on port 2222<br>
+                <code>ssh -p 2222 devuser@localhost</code>
+            </p>
+        </div>
+
+        <p style="margin-top: 2rem;">
+            <small>Kalisi Demo v0.1.0 | <a href="/api/health" style="color: white;">Health Check</a></small>
+        </p>
+    </div>
+
+    <script>
+        // Check if running in dev mode (SSH exposed)
+        fetch('/api/info')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('mode-display').textContent = 
+                    data.dev_mode ? '🛠️ Developer Mode' : '📦 Simple Mode';
+                document.getElementById('ssh-info').style.display = 
+                    data.dev_mode ? 'block' : 'none';
+                
+                document.getElementById('redis-status').textContent = 
+                    `Redis: ${data.redis_status || 'Unknown'}`;
+                document.getElementById('neo4j-status').textContent = 
+                    `Neo4j: ${data.neo4j_status || 'Unknown'}`;
+            })
+            .catch(e => {
+                document.getElementById('mode-display').textContent = '📦 Simple Mode';
+            });
+    </script>
+</body>
+</html>
