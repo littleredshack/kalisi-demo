@@ -130,13 +130,7 @@ docker rm kalisi 2>/dev/null || true
 
 # Run the container
 echo "🚀 Starting Kalisi Runtime..."
-docker run -d \
-    --name kalisi \
-    $PORTS \
-    $ENV_VARS \
-    -v kalisi-data:/data \
-    --restart unless-stopped \
-    ghcr.io/littleredshack/kalisi-runtime:latest
+docker run -d --name kalisi $PORTS $ENV_VARS -v kalisi-data:/data --restart unless-stopped ghcr.io/littleredshack/kalisi-runtime:latest
 
 # Wait for startup
 echo "⏳ Waiting for services to start..."
