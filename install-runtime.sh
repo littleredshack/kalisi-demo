@@ -131,7 +131,6 @@ docker rm kalisi 2>/dev/null || true
 # Run the container
 echo "🚀 Starting Kalisi Runtime..."
 docker run -d \
-
     --name kalisi \
     $PORTS \
     $ENV_VARS \
