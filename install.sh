@@ -2,7 +2,7 @@
 
 echo "
 ╔═══════════════════════════════════╗
-║     Kalisi Demo Installer         ║
+║       Kalisi Installer            ║
 ╚═══════════════════════════════════╝
 "
 
@@ -121,34 +121,34 @@ fi
 
 # Pull the image
 echo ""
-echo "📥 Downloading Kalisi Demo..."
-docker pull ghcr.io/littleredshack/kalisi-demo:latest
+echo "📥 Downloading Kalisi..."
+docker pull ghcr.io/littleredshack/kalisi:latest
 
 # Stop existing container if any
-docker stop kalisi-demo 2>/dev/null || true
-docker rm kalisi-demo 2>/dev/null || true
+docker stop kalisi 2>/dev/null || true
+docker rm kalisi 2>/dev/null || true
 
 # Run the container
-echo "🚀 Starting Kalisi Demo..."
+echo "🚀 Starting Kalisi..."
 docker run -d \
-    --name kalisi-demo \
+    --name kalisi \
     $PORTS \
     $ENV_VARS \
-    -v kalisi-demo-data:/data \
+    -v kalisi-data:/data \
     --restart unless-stopped \
-    ghcr.io/littleredshack/kalisi-demo:latest
+    ghcr.io/littleredshack/kalisi:latest
 
 # Wait for startup
 echo "⏳ Waiting for services to start..."
 sleep 10
 
 # Check if running
-if docker ps | grep -q kalisi-demo; then
+if docker ps | grep -q kalisi; then
     echo ""
-    echo "✅ Kalisi Demo is running!"
+    echo "✅ Kalisi is running!"
     echo ""
     echo "🌐 Open your browser to: https://localhost:8443"
-    echo "   (You may see a certificate warning - that's normal for the demo)"
+    echo "   (You may see a certificate warning - that's normal)"
     
     if [ "$MODE" = "Developer" ]; then
         echo ""
@@ -158,11 +158,11 @@ if docker ps | grep -q kalisi-demo; then
     fi
     
     echo ""
-    echo "📊 To see logs: docker logs -f kalisi-demo"
-    echo "🛑 To stop: docker stop kalisi-demo"
+    echo "📊 To see logs: docker logs -f kalisi"
+    echo "🛑 To stop: docker stop kalisi"
     echo ""
 else
-    echo "❌ Failed to start Kalisi Demo"
-    echo "Check logs with: docker logs kalisi-demo"
+    echo "❌ Failed to start Kalisi"
+    echo "Check logs with: docker logs kalisi"
     exit 1
 fi
